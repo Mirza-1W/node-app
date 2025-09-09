@@ -1,5 +1,11 @@
 pipeline {
-  agent any
+    agent any
+    environment {
+        DOCKER_HOST = 'tcp://localhost:2375'
+    }
+    tools {
+        nodejs "NodeJS-18"
+    }
   stages {
     stage('Checkout') {
       steps {
