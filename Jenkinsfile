@@ -7,6 +7,14 @@ pipeline {
         nodejs "NodeJS-24"
     }
   stages {
+      stage('Test AWS') {
+            steps {
+                withAWS(credentials: 'aws-cred', region: 'us-east-1') {
+                    bat 'aws sts get-caller-identity'
+                }
+            }
+        }
+    }
     stage('Checkout') {
       steps {
         git branch: 'main', url: 'https://github.com/Mirza-1W/node-app.git'
