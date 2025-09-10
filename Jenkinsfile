@@ -4,7 +4,7 @@ pipeline {
         DOCKER_HOST = 'tcp://localhost:2375'
     }
     tools {
-        nodejs "NodeJS-18"
+        nodejs "NodeJS-24"
     }
   stages {
     stage('Checkout') {
