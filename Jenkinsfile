@@ -26,6 +26,7 @@ pipeline {
         }
         stage('Test') {
             steps {
+                bat 'npm install'
                 bat 'npm test'
             }
         }
@@ -36,5 +37,20 @@ pipeline {
                 bat 'docker run -d -p 3000:3000 --name node-app node-app'
             }
         }
+        stage('Push to ECR') {
+    steps {
+        script {
+            docker.withRegistry('https://<your-aws-account-id>.dkr.ecr.<region>.amazonaws.com', 'ecr:us-east-1:aws-credentials') {
+                docker.image('node-app').push('latest')
+            }
+        }
+    }
+}
+stage('Deploy to ECS') {
+    steps {
+        sh 'aws ecs update-service --cluster my-cluster --service my-service --force-new-deployment'
+    }
+}
+
     }
 }
