@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'echo "Testing phase (add your test commands here)"'
+        sh 'npm test'
       }
     }
     stage('Deploy') {
