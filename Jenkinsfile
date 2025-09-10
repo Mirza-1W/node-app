@@ -14,7 +14,6 @@ pipeline {
                 }
             }
         }
-    }
     stage('Checkout') {
       steps {
         git branch: 'main', url: 'https://github.com/Mirza-1W/node-app.git'
